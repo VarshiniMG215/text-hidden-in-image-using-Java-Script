@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Secret - hide a message inside a picture</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Image Secret</h1>
+    <p>It’s a learning project. It shows the concept behind LSB steganography, which I also studied from the detection side. The real-world uses are watermarking and covert messaging, and the same technique is used by attackers, which is why I built a detector</p>
+    <p>Hide a short message inside a picture. Nobody can tell by looking at it.</p>
+  </header>
+
+  <main>
+
+    <!-- HIDE SECTION -->
+    <section class="box" id="hideBox">
+      <h2>Hide a message</h2>
+
+      <label class="file-label" for="hideFile">Choose a picture</label>
+      <input type="file" id="hideFile" accept="image/*">
+
+      <textarea id="secretText" rows="4" placeholder="Type your secret message here..."></textarea>
+      <p class="small" id="capacityText">Choose a picture to see how much text it can hold.</p>
+
+      <button id="hideBtn">Hide message</button>
+      <p class="error" id="hideError"></p>
+
+      <div class="compare" id="compareArea">
+        <div class="pic">
+          <h3>Before</h3>
+          <canvas id="beforeCanvas"></canvas>
+        </div>
+        <div class="pic">
+          <h3>After</h3>
+          <canvas id="afterCanvas"></canvas>
+        </div>
+      </div>
+
+      <div id="diffArea" class="hidden">
+        <h3>What changed?</h3>
+        <p class="small">The white dots are pixels that were changed. Slide to make the changes easier to see.</p>
+        <input type="range" id="diffSlider" min="1" max="255" value="255">
+        <canvas id="diffCanvas"></canvas>
+        <p class="small" id="diffInfo"></p>
+        <a id="downloadLink" class="button-link" download="secret-image.png">Download picture</a>
+      </div>
+    </section>
+
+    <!-- REVEAL SECTION -->
+    <section class="box" id="revealBox">
+      <h2>Reveal a message</h2>
+
+      <label class="file-label" for="revealFile">Choose a picture with a hidden message</label>
+      <input type="file" id="revealFile" accept="image/png">
+
+      <canvas id="revealCanvas" class="small-canvas"></canvas>
+
+      <button id="revealBtn">Reveal message</button>
+      <p class="error" id="revealError"></p>
+
+      <div id="resultBox" class="hidden">
+        <h3>Hidden message</h3>
+        <p id="resultText"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Works only with PNG pictures. JPG compression destroys the hidden message.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
